@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* ── Hepta Design Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Neutral */
+  --hepta-neutral-0: #ffffff;
+  --hepta-neutral-50: #f8f9fa;
+  --hepta-neutral-100: #f1f3f4;
+  --hepta-neutral-200: #e8eaed;
+  --hepta-neutral-300: #dadce0;
+  --hepta-neutral-400: #bdc1c6;
+  --hepta-neutral-500: #9aa0a6;
+  --hepta-neutral-600: #80868b;
+  --hepta-neutral-700: #5f6368;
+  --hepta-neutral-800: #3c4043;
+  --hepta-neutral-900: #202124;
+  --hepta-neutral-950: #000000;
+
+  /* Primary */
+  --hepta-primary-50: #e8f0fe;
+  --hepta-primary-100: #d2e3fc;
+  --hepta-primary-200: #aecbfa;
+  --hepta-primary-300: #7aacf4;
+  --hepta-primary-400: #3486e8;
+  --hepta-primary-500: #010a13;
+  --hepta-primary-600: #0052a3;
+  --hepta-primary-700: #003d7a;
+  --hepta-primary-800: #002952;
+  --hepta-primary-900: #001529;
+
+  /* Error */
+  --hepta-error-50: #fce8e6;
+  --hepta-error-500: #d93025;
+
+  /* Success */
+  --hepta-success-50: #e6f4ea;
+  --hepta-success-500: #1e8e3e;
+
+  /* Warning */
+  --hepta-warning-50: #fef7e0;
+  --hepta-warning-500: #f9ab00;
+
+  /* Semantic */
+  --background: var(--hepta-neutral-0);
+  --foreground: var(--hepta-neutral-900);
+  --muted: var(--hepta-neutral-100);
+  --muted-foreground: var(--hepta-neutral-600);
+  --card: var(--hepta-neutral-0);
+  --card-foreground: var(--hepta-neutral-900);
+  --border: var(--hepta-neutral-200);
+  --input: var(--hepta-neutral-200);
+  --primary: var(--hepta-primary-500);
+  --primary-foreground: var(--hepta-neutral-0);
+  --secondary: var(--hepta-neutral-100);
+  --secondary-foreground: var(--hepta-neutral-900);
+  --accent: var(--hepta-primary-50);
+  --accent-foreground: var(--hepta-primary-700);
+  --destructive: var(--hepta-error-500);
+  --destructive-foreground: var(--hepta-neutral-0);
+  --ring: var(--hepta-primary-300);
+  --radius: 8px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--hepta-neutral-900);
+    --foreground: var(--hepta-neutral-0);
+    --muted: var(--hepta-neutral-800);
+    --muted-foreground: var(--hepta-neutral-400);
+    --card: var(--hepta-neutral-800);
+    --card-foreground: var(--hepta-neutral-0);
+    --border: var(--hepta-neutral-700);
+    --input: var(--hepta-neutral-700);
+    --secondary: var(--hepta-neutral-800);
+    --secondary-foreground: var(--hepta-neutral-0);
+    --accent: var(--hepta-primary-900);
+    --accent-foreground: var(--hepta-primary-200);
+    --ring: var(--hepta-primary-500);
+  }
+}
+
+/* ── Tailwind Theme Inline ────────────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--hepta-success-500);
+  --color-warning: var(--hepta-warning-500);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --font-sans: "Vend Sans Variable", system-ui, -apple-system, sans-serif;
+  --font-mono: Menlo, Monaco, "Courier New", monospace;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  coupleId     String?
+  couple       Couple?    @relation(fields: [coupleId], references: [id])
+  plaidItems   PlaidItem[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Couple {
+  id          String       @id @default(cuid())
+  name        String       @default("Our Finances")
+  inviteCode  String       @unique @default(cuid())
+  users       User[]
+  budgetGoals BudgetGoal[]
+  debts       Debt[]
+  createdAt   DateTime     @default(now())
+}
+
+model PlaidItem {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken     String
+  itemId          String    @unique
+  institutionId   String?
+  institutionName String?
+  cursor          String?
+  accounts        Account[]
+  createdAt       DateTime  @default(now())
+}
+
+model Account {
+  id              String        @id @default(cuid())
+  plaidItemId     String
+  plaidItem       PlaidItem     @relation(fields: [plaidItemId], references: [id], onDelete: Cascade)
+  plaidAccountId  String        @unique
+  name            String
+  officialName    String?
+  type            String
+  subtype         String?
+  currentBalance  Float?
+  availableBalance Float?
+  isoCurrencyCode String?       @default("USD")
+  transactions    Transaction[]
+  updatedAt       DateTime      @updatedAt
+}
+
+model Transaction {
+  id                 String   @id @default(cuid())
+  accountId          String
+  account            Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  plaidTransactionId String   @unique
+  name               String
+  merchantName       String?
+  amount             Float
+  category           String?
+  subcategory        String?
+  date               DateTime
+  pending            Boolean  @default(false)
+  userId             String
+  createdAt          DateTime @default(now())
+}
+
+model BudgetGoal {
+  id            String   @id @default(cuid())
+  coupleId      String
+  couple        Couple   @relation(fields: [coupleId], references: [id], onDelete: Cascade)
+  name          String
+  category      String
+  targetAmount  Float
+  period        String   @default("monthly")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Debt {
+  id               String      @id @default(cuid())
+  coupleId         String
+  couple           Couple      @relation(fields: [coupleId], references: [id], onDelete: Cascade)
+  name             String
+  totalAmount      Float
+  currentBalance   Float
+  interestRate     Float       @default(0)
+  minimumPayment   Float       @default(0)
+  dueDate          Int?
+  assignedToUserId String?
+  payments         DebtPayment[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model DebtPayment {
+  id        String   @id @default(cuid())
+  debtId    String
+  debt      Debt     @relation(fields: [debtId], references: [id], onDelete: Cascade)
+  amount    Float
+  note      String?
+  paidById  String
+  date      DateTime @default(now())
+}
