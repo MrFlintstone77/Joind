@@ -109,7 +109,7 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
   --radius-xl: calc(var(--radius) + 8px);
-  --font-sans: "Vend Sans Variable", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-open-runde), system-ui, -apple-system, sans-serif;
   --font-mono: Menlo, Monaco, "Courier New", monospace;
 }
 
